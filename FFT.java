@@ -94,25 +94,20 @@ public class FFT{
     }
 
     private void butterfly1(Complex In[], int begin, int end, Complex Out[]){
-        int middlecount=begin-end/2;
-        
-        for(int i=begin; i<=middlecount; i++){
-                Out[i]=In[i].sum(In[i+middlecount+1]);
-                if(i<middlecount/2){Out[i+middlecount+1]=Out[i];}
-                else{Out[i+middlecount+1]=Out[i].jmul();}            
+        int middle=begin+((end-begin)/2);
+        for(int i=begin; i<=middle; i++){
+                Out[i]=In[i].sum(In[i+middle+1]);
+                if(i<=(middle-begin)/2){
+                    Out[i+middle+1]=In[i].sub(In[i+middle+1]);
+                }
+                else{
+                    Out[i+middle+1]=(In[i].sub(In[i+middle+1])).jmul();
+                }
         }
     }
 
     private void butterfly2(Complex In[], int begin, int end, int k, int N, Complex Out[]){
-        int middlecount=begin-end/2;
-        Complex basis = new Complex();
-
-        for(int i=begin; i<=middlecount; i++){
-            basis= In[i].sum(In[i+middlecount+1]);
-            Out[i]= basis.twiddlemul(i,k,N);
-            Out[i+middlecount+1]=basis.twiddlemul(3*i, k, N);
-        }
-
+        
     }
 
     public static void main(String[] args) {
