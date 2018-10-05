@@ -10,23 +10,23 @@
 
 class Complex {
 private:
-	double real, imaginary;
+	double* real;
+	double* imaginary;
 public:
 	Complex(double re=0, double im=0);
 	Complex(const Complex& A);
 
 	void set(double re, double im);
 
-	Complex inline operator=(const Complex& A){return Complex(A);}
-	Complex operator +(const Complex& A);
-	Complex operator -(const Complex& A);
-	Complex operator *(const Complex& A);
-	Complex jmul();
+	void operator = (const Complex& A);
+	Complex operator + (const Complex& A);
+	Complex operator - (const Complex& A);
+	Complex operator * (const Complex& A);
+	Complex operator * (const Complex* A);
 	Complex twiddle(int n, int k, int N);
+	void jmul(void);
 
 	void print();
-
-	void test();
 
 	virtual ~Complex();
 };
